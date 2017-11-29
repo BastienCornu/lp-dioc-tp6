@@ -28,11 +28,11 @@ class Tag
      * Tag constructor.
      * @param $id
      */
-    public function __construct()
+    public function __construct($name,$slug)
     {
-
+        $this->name = $name;
+        $this->slug = $slug;
     }
-
 
     /**
      * @return mixed

@@ -42,9 +42,13 @@ class ArticleStat
 
     /**
      * ArticleStat constructor.
+     * @param $action
+     * @param $article
      */
-    public function __construct()
+    public function __construct($article,$action)
     {
+        $this->action = $action;
+        $this->article = $article;
     }
 
 

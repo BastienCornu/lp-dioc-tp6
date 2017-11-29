@@ -156,7 +156,7 @@ class User implements UserInterface, \Serializable
     {
         $roles = ['ROLE_USER'];
 
-        if ($this->isAuthor()) {
+        if ($this->getIsAuthor()) {
             $roles[] = 'ROLE_AUTHOR';
         }
 

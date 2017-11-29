@@ -14,14 +14,33 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // FIXME: Ajouter les champs firstname, lastname, email, birthday
+
         $builder
-            ->add('submit', SubmitType::class)
-        ;
+            ->add('title',TextType::class)
+            ->add('content',TextareaType::class)
+            ->add('tags',
+                EntityType::class,
+                [
+                    'class' => Tag::class,
+                    'choice_label' => 'name',
+                    'multiple' => true,
+                    'expanded' => true,
+                ])
+            ->add(
+                'save',
+                SubmitType::class,
+                array('label' => 'Créer')
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        // FIXME: ajouter la configuration du for
+        $resolver->setDefaults(array("data_class" => Article::class));
+
     }
 }

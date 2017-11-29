@@ -8,6 +8,7 @@ use App\Article\UpdateArticleHandler;
 use App\Article\ViewArticleHandler;
 use App\Entity\Article;
 use App\Form\ArticleType;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,16 +22,31 @@ class ArticleController extends Controller
     /**
      * @Route(path="/show/{slug}", name="article_show")
      */
-    public function showAction()
+    public function showAction($slug)
     {
+
     }
 
     /**
      * @Route(path="/new", name="article_new")
      */
-    public function newAction()
+    public function newAction(Request $request, NewArticleHandler $articleHandler)
     {
         // Seul les auteurs doivent avoir access.
+        $em = $this->getDoctrine()->getManager();
+        $article = new Article();
+
+        $form = $this->createForm(ArticleType::class,$article);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $articleHandler->handle($article);
+            $em->persist($article);
+            $em->flush();
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+        return $this->render("Article/new.html.twig",['form'=>$form->createView(), ]);
+
     }
 
     /**

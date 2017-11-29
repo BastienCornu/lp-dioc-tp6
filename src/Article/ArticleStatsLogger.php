@@ -10,8 +10,18 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class ArticleStatsLogger
 {
+    public $doctrine;
+    public function __construct(Registry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
+
     public function log(Article $article, string $action): void
     {
+        $em = $this->doctrine->getManager();
+
         // Créer un article stat et le persist.
+        $articleStat = new ArticleStat($article,$action);
+        $em->persist($articleStat);
     }
 }

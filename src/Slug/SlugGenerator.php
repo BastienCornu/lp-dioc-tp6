@@ -6,7 +6,7 @@ use Cocur\Slugify\Slugify;
 
 class SlugGenerator
 {
-    public function generate(string $name): string
+    public function generate(string $name)
     {
         $slugify = new Slugify();
 
