@@ -21,7 +21,7 @@ class ArticleStatsLogger
         $em = $this->doctrine->getManager();
 
         // Créer un article stat et le persist.
-        $articleStat = new ArticleStat($article,$action);
+        $articleStat = new ArticleStat($action,new \DateTime(),null,$article,null);
         $em->persist($articleStat);
     }
 }

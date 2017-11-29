@@ -44,12 +44,25 @@ class ArticleStat
      * ArticleStat constructor.
      * @param $action
      * @param $article
+     * @param $date
+     * @param $ip
+     * @param $user
      */
-    public function __construct($article,$action)
+    public function __construct($action, $article, $date, $ip, $user)
     {
         $this->action = $action;
         $this->article = $article;
+        $this->date = $date;
+        $this->ip = $ip;
+        $this->user = $user;
     }
+
+    /**
+     * ArticleStat constructor.
+     * @param $action
+     * @param $article
+     */
+
 
 
     /**
